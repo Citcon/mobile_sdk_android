@@ -1,1 +1,5 @@
-# mobile_sdk_android
+# Citcon Mobile SDK for Android
+Content included:
+* SDK library
+* Documentation
+* Sample mobile app

@@ -1,6 +1,10 @@
 package citcon.cpay;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ScrollView mScrollView;
 
     private CPayOrderResult mPayOrderResult;
+    private BroadcastReceiver mInquireReceiver;
 
     private static CPayMode ENV = CPayMode.UAT;
 
@@ -54,8 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if (testUSD) {
             REF_ID = "pay-mobile-test";
-            // AUTH_TOKEN = "9FBBA96E77D747659901CCBF787CDCF1";
-            AUTH_TOKEN = "FF1EBE48804240A5A49FD46024504999";
+            AUTH_TOKEN = "9FBBA96E77D747659901CCBF787CDCF1";
             CALLBACK_URL = "https://uat.citconpay.com/payment/notify_wechatpay.php";
             CURRENCY = "USD";
         } else {
@@ -64,7 +68,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             CALLBACK_URL = "http://52.87.248.227/ipn.php";
             CURRENCY = "CNY";
         }
-        // AUTH_TOKEN = "14F4042878E84AFD8948F17FBE9FF934";
 
         ActivityCompat.requestPermissions(this,
                 new String[]{Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
@@ -91,6 +94,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mVendorEditText.setText("wechatpay"); // payment vendor wechatpay or alipay
         mIpnEditText.setText(CALLBACK_URL); //citcon payment callback url
         mCallbackEditText.setText("http://www.google.com"); // custom callback url to customization processing
+
+        /**
+         *
+         * <p>Get payment success broadcasting CPayInquireResult
+         *
+         */
+        mInquireReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                CPayInquireResult response = (CPayInquireResult) intent.getSerializableExtra("inquire_result");
+                // Add your code here
+            }
+        };
     }
 
     @Override
@@ -203,5 +219,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             CPaySDK.setMode(CPayMode.PROD);
         }
+        // Register broadcast
+        registerInquireReceiver();
+    }
+
+    /**
+     * <p>onPause to unregister BroadcastReceiver.
+     */
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        unregisterInquireReceiver();
+    }
+
+    /**
+     * Register BroadcastReceiver.
+     */
+    private void registerInquireReceiver() {
+        if (mInquireReceiver != null) {
+            IntentFilter filter = new IntentFilter();
+            filter.addAction("CPAY_INQUIRE_ORDER");
+            CPaySDK.getInstance().registerReceiver(mInquireReceiver, filter);
+        }
+    }
+
+    /**
+     * <p>unregister BroadcastReceiver.
+     */
+    private void unregisterInquireReceiver() {
+        if (mInquireReceiver != null)
+            CPaySDK.getInstance().unregisterReceiver(mInquireReceiver);
     }
 }

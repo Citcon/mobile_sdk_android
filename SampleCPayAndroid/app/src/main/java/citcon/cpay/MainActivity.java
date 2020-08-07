@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button buttonRequestOrder;
     private Button buttonInquireOrder;
     private EditText mReferenceIdEditText, mSubjectEditText, mBodyEditText, mAmountEditText,
-            mCurrencyEditText, mVendorEditText, mIpnEditText, mCallbackEditText;
+            mCurrencyEditText, mVendorEditText, mIpnEditText, mCallbackEditText, mTransCurrency;
     private Switch mSwitch;
     private TextView mInquireResultTextView, mOrderResultTextView;
     private ScrollView mScrollView;
@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mInquireResultTextView = findViewById(R.id.inquire_result_textView);
         mOrderResultTextView = findViewById(R.id.order_result_textView);
         mScrollView = findViewById(R.id.scrollView);
+        mTransCurrency = findViewById(R.id.trans_currency_editText);
 
         mReferenceIdEditText.setText(REF_ID); //Citcon Referance ID
         mSubjectEditText.setText("Test"); // order subject
@@ -112,7 +113,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.request_button) {
-            final CPayOrder order = new CPayOrder(mReferenceIdEditText.getText().toString(),
+            if (mCurrencyEditText.getText().toString().equals("USD")) {
+                AUTH_TOKEN = "9FBBA96E77D747659901CCBF787CDCF1";
+            } else {
+                AUTH_TOKEN = "CNYAPPF6A0FE479A891BF45706A690AE";
+            }
+            CPaySDK.getInstance().mToken = AUTH_TOKEN;
+            CPaySDK.setMode(CPayMode.UAT);
+
+            CPayOrder order = new CPayOrder(mReferenceIdEditText.getText().toString(),
                     mSubjectEditText.getText().toString(),
                     mBodyEditText.getText().toString(),
                     mAmountEditText.getText().toString(),
@@ -120,7 +129,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     mVendorEditText.getText().toString(),
                     mIpnEditText.getText().toString(),
                     mCallbackEditText.getText().toString(),
-                    mSwitch.isChecked());
+                    mSwitch.isChecked(),
+                    mTransCurrency.getText().toString());
 
             CPaySDK.getInstance().requestOrder(order, new OrderResponse<CPayOrderResult>() {
                 @Override
@@ -129,20 +139,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if (orderResult != null) {
                         mPayOrderResult = orderResult;
                         String orderResultStr = "ORDER RESULT:";
-                        if (orderResult.mOrderId != null) {
-                            orderResultStr += "ORDER ID: " + orderResult.mOrderId + "\n";
+                        if (orderResult.orderId != null) {
+                            orderResultStr += "ORDER ID: " + orderResult.orderId + "\n";
                         }
-                        if (orderResult.mOrderSpec != null) {
-                            orderResultStr += "ORDER SPEC: " + orderResult.mOrderSpec + "\n";
+                        if (orderResult.orderSpec != null) {
+                            orderResultStr += "ORDER SPEC: " + orderResult.orderSpec + "\n";
                         }
-                        if (orderResult.mStatus != null) {
-                            orderResultStr += "STATUS: " + orderResult.mStatus + "\n";
+                        if (orderResult.status != null) {
+                            orderResultStr += "STATUS: " + orderResult.status + "\n";
                         }
-                        if (orderResult.mMessage != null) {
-                            orderResultStr += "MESSAGE: " + orderResult.mMessage + "\n";
+                        if (orderResult.message != null) {
+                            orderResultStr += "MESSAGE: " + orderResult.message + "\n";
                         }
-                        if (orderResult.mCurrency != null) {
-                            orderResultStr += "CURRENCY: " + orderResult.mCurrency + "\n";
+                        if (orderResult.currency != null) {
+                            orderResultStr += "CURRENCY: " + orderResult.currency + "\n";
                         }
 
                         mOrderResultTextView.setText(orderResultStr);
@@ -163,34 +173,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return;
             }
 
+            if (mCurrencyEditText.getText().toString().equals("USD")) {
+                AUTH_TOKEN = "9FBBA96E77D747659901CCBF787CDCF1";
+            } else {
+                AUTH_TOKEN = "CNYAPPF6A0FE479A891BF45706A690AE";
+            }
+            CPaySDK.getInstance().mToken = AUTH_TOKEN;
+            CPaySDK.setMode(CPayMode.UAT);
+
             CPaySDK.getInstance().inquireOrder(mPayOrderResult, new InquireResponse<CPayInquireResult>() {
                 @Override
                 public void gotInquireResult(CPayInquireResult cPayInquireResult) {
                     if (cPayInquireResult != null) {
                         String inquireResultStr = "ORDER RESULT:";
-                        if (cPayInquireResult.mId != null) {
-                            inquireResultStr += "ORDER ID: " + cPayInquireResult.mId + "\n";
+                        if (cPayInquireResult.transactionId != null) {
+                            inquireResultStr += "ORDER ID: " + cPayInquireResult.transactionId + "\n";
                         }
-                        if (cPayInquireResult.mType != null) {
-                            inquireResultStr += "TYPE: " + cPayInquireResult.mType + "\n";
+                        if (cPayInquireResult.type != null) {
+                            inquireResultStr += "TYPE: " + cPayInquireResult.type + "\n";
                         }
-                        if (cPayInquireResult.mAmount != null) {
-                            inquireResultStr += "AMOUNT: " + cPayInquireResult.mAmount + "\n";
+                        if (cPayInquireResult.amount != null) {
+                            inquireResultStr += "AMOUNT: " + cPayInquireResult.amount + "\n";
                         }
-                        if (cPayInquireResult.mTime != null) {
-                            inquireResultStr += "TIME: " + cPayInquireResult.mTime + "\n";
+                        if (cPayInquireResult.time != null) {
+                            inquireResultStr += "TIME: " + cPayInquireResult.time + "\n";
                         }
-                        if (cPayInquireResult.mReference != null) {
-                            inquireResultStr += "REFERENCE: " + cPayInquireResult.mReference + "\n";
+                        if (cPayInquireResult.referenceId != null) {
+                            inquireResultStr += "REFERENCE: " + cPayInquireResult.referenceId + "\n";
                         }
-                        if (cPayInquireResult.mStatus != null) {
-                            inquireResultStr += "STATUS: " + cPayInquireResult.mStatus + "\n";
+                        if (cPayInquireResult.status != null) {
+                            inquireResultStr += "STATUS: " + cPayInquireResult.status + "\n";
                         }
-                        if (cPayInquireResult.mCurrency != null) {
-                            inquireResultStr += "CURRENCY: " + cPayInquireResult.mCurrency + "\n";
+                        if (cPayInquireResult.currency != null) {
+                            inquireResultStr += "CURRENCY: " + cPayInquireResult.currency + "\n";
                         }
-                        if (cPayInquireResult.mNote != null) {
-                            inquireResultStr += "NOTE: " + cPayInquireResult.mNote + "\n";
+                        if (cPayInquireResult.note != null) {
+                            inquireResultStr += "NOTE: " + cPayInquireResult.note + "\n";
                         }
 
                         mInquireResultTextView.setText(inquireResultStr);

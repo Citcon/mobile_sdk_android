@@ -119,6 +119,24 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/trans_currency_textView"
+                    android:text="@string/trans_currency"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:id="@+id/trans_currency_editText"
+                    android:singleLine="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
                     android:id="@+id/vendor_textView"
                     android:text="@string/vendor"
                     android:layout_width="wrap_content"

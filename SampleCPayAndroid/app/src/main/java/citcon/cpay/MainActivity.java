@@ -139,20 +139,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if (orderResult != null) {
                         mPayOrderResult = orderResult;
                         String orderResultStr = "ORDER RESULT:";
-                        if (orderResult.orderId != null) {
-                            orderResultStr += "ORDER ID: " + orderResult.orderId + "\n";
+                        if (orderResult.mOrderId != null) {
+                            orderResultStr += "ORDER ID: " + orderResult.mOrderId + "\n";
                         }
-                        if (orderResult.orderSpec != null) {
-                            orderResultStr += "ORDER SPEC: " + orderResult.orderSpec + "\n";
+                        if (orderResult.mOrderSpec != null) {
+                            orderResultStr += "ORDER SPEC: " + orderResult.mOrderSpec + "\n";
                         }
-                        if (orderResult.status != null) {
-                            orderResultStr += "STATUS: " + orderResult.status + "\n";
+                        if (orderResult.mStatus != null) {
+                            orderResultStr += "STATUS: " + orderResult.mStatus + "\n";
                         }
-                        if (orderResult.message != null) {
-                            orderResultStr += "MESSAGE: " + orderResult.message + "\n";
+                        if (orderResult.mMessage != null) {
+                            orderResultStr += "MESSAGE: " + orderResult.mMessage + "\n";
                         }
-                        if (orderResult.currency != null) {
-                            orderResultStr += "CURRENCY: " + orderResult.currency + "\n";
+                        if (orderResult.mCurrency != null) {
+                            orderResultStr += "CURRENCY: " + orderResult.mCurrency + "\n";
                         }
 
                         mOrderResultTextView.setText(orderResultStr);
@@ -186,29 +186,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 public void gotInquireResult(CPayInquireResult cPayInquireResult) {
                     if (cPayInquireResult != null) {
                         String inquireResultStr = "ORDER RESULT:";
-                        if (cPayInquireResult.transactionId != null) {
-                            inquireResultStr += "ORDER ID: " + cPayInquireResult.transactionId + "\n";
+                        if (cPayInquireResult.mId != null) {
+                            inquireResultStr += "ORDER ID: " + cPayInquireResult.mId + "\n";
                         }
-                        if (cPayInquireResult.type != null) {
-                            inquireResultStr += "TYPE: " + cPayInquireResult.type + "\n";
+                        if (cPayInquireResult.mType != null) {
+                            inquireResultStr += "TYPE: " + cPayInquireResult.mType + "\n";
                         }
-                        if (cPayInquireResult.amount != null) {
-                            inquireResultStr += "AMOUNT: " + cPayInquireResult.amount + "\n";
+                        if (cPayInquireResult.mAmount != null) {
+                            inquireResultStr += "AMOUNT: " + cPayInquireResult.mAmount + "\n";
                         }
-                        if (cPayInquireResult.time != null) {
-                            inquireResultStr += "TIME: " + cPayInquireResult.time + "\n";
+                        if (cPayInquireResult.mTime != null) {
+                            inquireResultStr += "TIME: " + cPayInquireResult.mTime + "\n";
                         }
-                        if (cPayInquireResult.referenceId != null) {
-                            inquireResultStr += "REFERENCE: " + cPayInquireResult.referenceId + "\n";
+                        if (cPayInquireResult.mReference != null) {
+                            inquireResultStr += "REFERENCE: " + cPayInquireResult.mReference + "\n";
                         }
-                        if (cPayInquireResult.status != null) {
-                            inquireResultStr += "STATUS: " + cPayInquireResult.status + "\n";
+                        if (cPayInquireResult.mStatus != null) {
+                            inquireResultStr += "STATUS: " + cPayInquireResult.mStatus + "\n";
                         }
-                        if (cPayInquireResult.currency != null) {
-                            inquireResultStr += "CURRENCY: " + cPayInquireResult.currency + "\n";
+                        if (cPayInquireResult.mCurrency != null) {
+                            inquireResultStr += "CURRENCY: " + cPayInquireResult.mCurrency + "\n";
                         }
-                        if (cPayInquireResult.note != null) {
-                            inquireResultStr += "NOTE: " + cPayInquireResult.note + "\n";
+                        if (cPayInquireResult.mNote != null) {
+                            inquireResultStr += "NOTE: " + cPayInquireResult.mNote + "\n";
                         }
 
                         mInquireResultTextView.setText(inquireResultStr);

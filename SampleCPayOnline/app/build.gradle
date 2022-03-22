@@ -47,8 +47,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
-    //implementation 'com.citcon.sdk:mobile:2.5.2'
-    implementation fileTree(dir: "libs", include: ["*.aar"])
+    implementation 'com.citcon.sdk:mobile:2.5.3'
+    //implementation fileTree(dir: "libs", include: ["*.aar"])
     implementation 'com.android.volley:volley:1.2.1'
 
     // WechatPay

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="vendors_list">
+        <item>upop</item>
+        <item>wechatpay</item>
+        <item>alipay</item>
+        <item>sbps</item>
+        <item>kcp</item>
+        <item>kakaopay</item>
+        <item>dana</item>
+        <item>alipay_hk</item>
+    </string-array>
+
+    <string-array name="kcp_vendors_list">
+        <item>card</item>
+        <item>payco</item>
+        <item>naverpay</item>
+        <item>banktransfer</item>
+    </string-array>
+
+    <string-array name="sbps_vendors_list">
+        <item>card</item>
+        <item>alipay</item>
+        <item>upop</item>
+        <item>linepay</item>
+        <item>paypay</item>
+        <item>rakutenpay</item>
+    </string-array>
+
+    <string-array name="mode_list">
+        <item>UAT</item>
+        <item>QA</item>
+        <item>DEV</item>
+        <item>PROD</item>
+    </string-array>
+
+    <string-array name="currency_list">
+        <item>USD</item>
+        <item>CAD</item>
+        <item>HKD</item>
+        <item>KRW</item>
+        <item>CNY</item>
+        <item>IDR</item>
+        <item>JPY</item>
+    </string-array>
+
+</resources>

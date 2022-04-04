@@ -11,14 +11,13 @@ import sdk.interfaces.OrderResponse
 import sdk.models.CPayInquireResult
 import sdk.models.CPayOrder
 import sdk.models.CPayOrderResult
-import java.util.*
 
 class MainViewModel : ViewModel() {
     val AUTH_TOKEN = "XYIL2W9BCQSTNN1CXUQ6WEH9JQYZ3VLM"
     val ENV_MODE = CPayMode.UAT
     lateinit var order: CPayOrder
 
-    fun inquireOrder( listerner: InquireResponse<CPayInquireResult> ) {
+    fun inquireOrder( listerner: InquireResponse<CPayInquireResult>) {
         CPaySDK.getInstance().inquireOrderByRef(order.mReferenceId, order.currency, order.vendor,
             order.isAccelerateCNPay, listerner)
     }

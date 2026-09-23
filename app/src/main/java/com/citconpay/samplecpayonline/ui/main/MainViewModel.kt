@@ -15,8 +15,9 @@ import sdk.models.CPayOrderResult
 import java.util.Locale
 
 class MainViewModel : ViewModel() {
-//    val AUTH_TOKEN = "XYIL2W9BCQSTNN1CXUQ6WEH9JQYZ3VLM"
-    val AUTH_TOKEN = "C02CTJAFQ3XV5BNHCWKSLLYVTQADM9H0"
+    // Put your own Citcon token here. Left empty on purpose: this is a public
+    // repository.
+    val AUTH_TOKEN = ""
     val ENV_MODE = CPayMode.QA
     lateinit var order: CPayOrder
 

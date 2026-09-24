@@ -60,7 +60,7 @@ dependencies {
     implementation 'com.alipay.sdk:alipaysdk-android:15.8.17'
 
     // UnionPay
-    implementation 'com.citcon.sdk:unionpay:3.4.0'
+    implementation 'com.citcon.sdk:unionpay:3.4.1'
 
     implementation 'org.apache.commons:commons-text:1.6'
 
